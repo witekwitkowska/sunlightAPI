@@ -62,6 +62,8 @@ class TestSunlightController(unittest.TestCase):
     def test_get(self):
         response = requests.get(BASE + "sunlightAPI/barcelona/gracia/mi/3")
         self.assertEqual(str(response), "<Response [200]>")
+        time_format = '([01]?[0-9]|2[0-3]):[0-5][0-9] - ([01]?[0-9]|2[0-3]):[0-5][0-9]'
+        self.assertRegex(response.content.decode().strip(), time_format)
 
     def test_get_not_existing_neighborhood(self):
         response = requests.get(BASE + "sunlightAPI/barcelona/gracian/mi/3")
